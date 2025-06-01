@@ -1,0 +1,15 @@
+# Node.js dependencies (backend)
+node_modules/
+
+# React dependencies (frontend)
+frontend/node_modules/
+
+# Environment files
+*.env
+
+# Build folders
+frontend/build/
+backend/dist/
+
+# Logs
+*.log
