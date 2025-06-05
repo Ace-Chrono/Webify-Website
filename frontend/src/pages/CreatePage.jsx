@@ -34,7 +34,7 @@ const CreatePage = () => {
         <Container maxW={"container.sm"}>
             <VStack spacing = {8}>
                 <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mb = {8} mt={8}>
-                    Create New Preset
+                    Publish Preset
                 </Heading>
 
                 <Box w = {"full"} bg = "gray.700" p = {6} rounded = {"lg"} shadow = {"md"}>
@@ -79,22 +79,8 @@ const CreatePage = () => {
                                 </FileUpload.Trigger>
                             <FileUpload.List />
                         </FileUpload.Root>
-                        {/*
-                        <Input 
-                            placeholder = 'Settings' 
-                            name = 'settings' 
-                            value = {newPreset.settings}
-                            onChange = {(e) => setNewPreset({ ...newPreset, settings: e.target.value})}
-                        />
-                        <Input 
-                            placeholder = 'Image URL' 
-                            name = 'image' 
-                            value = {newPreset.image}
-                            onChange = {(e) => setNewPreset({ ...newPreset, image: e.target.value})}
-                        />
-                        */}
                         <Button bg = "blue.500" onClick = {handleAddPreset} w = 'full'>
-                            Add Preset
+                            Publish Preset
                         </Button>
                     </VStack>
                 </Box>

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { getPresetDB } from "../config/db.js";
 
 const presetSchema = new mongoose.Schema({
     name: String,
@@ -16,6 +17,6 @@ const presetSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Preset = mongoose.model('Preset', presetSchema);
+const Preset = getPresetDB().model('Preset', presetSchema);
 
 export default Preset;

@@ -51,11 +51,6 @@ export const getPreset = async (req,res) => {
 }
 
 export const createPreset = async (req, res) => {
-    console.log("---- SERVER RECEIVED ----");
-    console.log("req.body:", req.body);
-    console.log("req.files:", req.files);
-    console.log("--------------------------");
-
     const name = req.body.name;
     const settingsFile = req.files?.settings?.[0];
     const imageFile = req.files?.image?.[0];
