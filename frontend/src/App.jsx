@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Flex} from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from "@/components/ui/toaster"
 
@@ -12,18 +12,20 @@ import ImportPage from './pages/ImportPage';
 
 function App() {
   return (
-    <Box minH={"100vh"} bg = "gray.800">
+    <Flex minH="100vh" direction="column" bg="gray.800">
       <Navbar />
       <Toaster />
-      <Routes>
-        <Route path = "/" element = {<HomePage />} />
-        <Route path = "/create" element = {<CreatePage />} />
-        <Route path = "/import" element = {<ImportPage />} />
-        <Route path = "/account" element = {<AccountPage />} />
-        <Route path = "/preset/:id" element = {<PresetDetails />} />
-      </Routes>
+        <Box flex = "1">
+          <Routes>
+            <Route path = "/" element = {<HomePage />} />
+            <Route path = "/create" element = {<CreatePage />} />
+            <Route path = "/import" element = {<ImportPage />} />
+            <Route path = "/account" element = {<AccountPage />} />
+            <Route path = "/preset/:id" element = {<PresetDetails />} />
+          </Routes>
+        </Box>
       <Footer />
-    </Box>
+    </Flex>
   );
 }
 

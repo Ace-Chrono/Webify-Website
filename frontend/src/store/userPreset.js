@@ -13,6 +13,9 @@ export const useUserPresetStore = create((set) => ({
         formData.append("settings", newUserPreset.settings);
         formData.append("image", newUserPreset.image);
         formData.append("isPublished", newUserPreset.isPublished);
+        if (newUserPreset.sourcePresetId !== undefined) {
+            formData.append("sourcePresetId", newUserPreset.sourcePresetId);
+        }
 
         for (const [key, value] of formData.entries()) {
             if (value instanceof File) {

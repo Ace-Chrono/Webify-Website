@@ -1,19 +1,43 @@
 import { Box, Button, Heading, HStack, Text, Spacer } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { VscCloudDownload } from 'react-icons/vsc';
+import { toaster } from "@/components/ui/toaster"
+import { usePresetStore } from '@/store/preset';
 
 const UserPresetCard = ({userPreset}) => {
-    const handleDownload = () => {
-        const json = JSON.stringify(userPreset.settings, null, 2); // formatted JSON
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
+    const { createPreset } = usePresetStore();
+    const handlePublish = async() => {
+        const settingsBlob = new Blob(
+            [JSON.stringify(userPreset.settings)], 
+            { type: 'application/json' }
+        );
+        const settingsFile = new File([settingsBlob], "settings.json", {
+            type: 'application/json'
+        });
 
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${userPreset.name || 'preset'}.json`;
-        a.click();
-        URL.revokeObjectURL(url); // clean up
+        const res = await fetch(userPreset.image); // This fetches the base64 image
+        const imageBlob = await res.blob();
+        const imageFile = new File([imageBlob], "image.png", {
+            type: imageBlob.type || 'image/png'
+        });
+        const {success, message} = await createPreset({
+            name: userPreset.name,
+            settings: settingsFile,
+            image: imageFile
+        });
+
+        if(!success) {
+            toaster.create({
+                title: "Error",
+                description: message,
+                type: "error"
+            });
+        } else {
+            toaster.create({
+                title: "Success",
+                description: message,
+                type: "success"
+            });
+        }
     };
 
     return (
@@ -28,29 +52,15 @@ const UserPresetCard = ({userPreset}) => {
             <img
                 src={userPreset.image}
                 alt={userPreset.name}
-                style={{ height: '250px', width: '100%', objectFit: 'cover', borderRadius: '8px' }}
+                style={{ height: '180px', width: '100%', objectFit: 'cover', borderRadius: '8px' }}
             />
             <Box p = {4}>
                 <Heading as = 'h3' size = 'md' mb = {2}>
                     {userPreset.name}
                 </Heading>
-                <HStack spacing = {2}>
-                    <Link to={`/preset/${userPreset._id}`}>
-                        <Text
-                            as="span"
-                            color="blue.500"
-                            _hover={{ textDecoration: 'underline' }}
-                        >
-                            View details
-                        </Text>
-                    </Link>
-
-                    <Spacer />
-
-                    <Button onClick = {handleDownload}>
-                        <VscCloudDownload  />
-                    </Button>
-                </HStack>
+                <Button onClick = {handlePublish}>
+                    Publish
+                </Button>
             </Box>
             
         </Box>

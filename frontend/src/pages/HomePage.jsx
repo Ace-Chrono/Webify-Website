@@ -1,4 +1,4 @@
-import { Container, VStack, Text, SimpleGrid } from '@chakra-ui/react';
+import { Container, VStack, Text, SimpleGrid, Heading } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { usePresetStore } from '@/store/preset';
@@ -13,25 +13,21 @@ const HomePage = () => {
   console.log("presets", presets)
 
   return (
-    <Container maxW = 'container.xl' py = {12}>
+    <Container maxW = 'container.xl'>
       <VStack spacing = {8}>
-        <Text
-          fontSize = {"40px"}
-          fontWeight = {"bold"}
-          textAlign = {"center"}
-          color = "blue.500"
-        >
+        <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
           Browse Presets
-        </Text>
+        </Heading>
 
         <SimpleGrid
           columns = {{
             base: 1,
-            md: 2,
-            lg: 3
+            md: 3,
+            lg: 4
           }}
           spacing = {10}
           w = {"full"}
+          mt = {4}
         >
           {presets.map((preset) => (
             <PresetCard key = {preset._id} preset = {preset} />

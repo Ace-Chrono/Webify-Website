@@ -55,6 +55,10 @@ export const createPreset = async (req, res) => {
     const settingsFile = req.files?.settings?.[0];
     const imageFile = req.files?.image?.[0];
 
+    console.log(name);
+    console.log(settingsFile);
+    console.log(imageFile);
+
     if (!name || !settingsFile || !imageFile) {
         return res.status(400).json({ success: false, message: "Please provide all fields" });
     }

@@ -4,7 +4,7 @@ import { toaster } from "@/components/ui/toaster"
 import { HiUpload } from "react-icons/hi"
 import React, { useState, useEffect } from 'react';
 import { useUserPresetStore } from '@/store/userPreset';
-import PresetCard from '@/components/PresetCard';
+import UserPresetCard from '@/components/UserPresetCard';
 
 const CreatePage = () => {
     const [newPreset, setNewPreset] = useState({
@@ -49,19 +49,21 @@ const CreatePage = () => {
                     Publish Preset from Account
                 </Heading>
 
-                <SimpleGrid
-                    columns = {{
-                    base: 1,
-                    md: 2,
-                    lg: 3
-                    }}
-                    spacing = {10}
-                    w = {"full"}
-                >
-                    {userPresets.map((preset) => (
-                    <PresetCard key = {preset._id} preset = {preset} />
-                    ))}
-                </SimpleGrid>
+                <Box maxH="640px" overflowY="auto" p={2} border="1px solid" borderColor="gray.700" borderRadius="md">
+                    <SimpleGrid
+                        columns = {{
+                        base: 1,
+                        md: 3,
+                        lg: 4
+                        }}
+                        spacing = {10}
+                        w = {"full"}
+                    >
+                        {userPresets.map((userPreset) => (
+                        <UserPresetCard key = {userPreset._id} userPreset = {userPreset} />
+                        ))}
+                    </SimpleGrid>
+                </Box>
 
                 <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>
                     Publish Preset Manually
