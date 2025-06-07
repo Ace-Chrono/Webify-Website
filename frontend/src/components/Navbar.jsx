@@ -24,9 +24,19 @@ const Navbar = () => {
         </Link>
 
         <HStack spacing={2} alignItems="center">
+          <Link to="/">
+            <Button>
+              Explore
+            </Button>
+          </Link>
           <Link to="/create">
             <Button>
-              <BsPlusSquare size={24} />
+              Publish
+            </Button>
+          </Link>
+          <Link to="/import">
+            <Button>
+              Import
             </Button>
           </Link>
           <Link to="/account">

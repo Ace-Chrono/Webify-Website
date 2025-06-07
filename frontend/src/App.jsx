@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import AccountPage from './pages/AccountPage';
 import Navbar from './components/Navbar';
 import PresetDetails from './pages/PresetDetailsPage';
+import ImportPage from './pages/ImportPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {<HomePage />} />
         <Route path = "/create" element = {<CreatePage />} />
+        <Route path = "/import" element = {<ImportPage />} />
         <Route path = "/account" element = {<AccountPage />} />
         <Route path = "/preset/:id" element = {<PresetDetails />} />
       </Routes>
