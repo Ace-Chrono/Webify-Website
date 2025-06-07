@@ -39,7 +39,7 @@ const ImportPage = () => {
 return (
     <Container maxW={"container.sm"}>
         <VStack spacing = {8}>
-            <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mb = {8} mt={8}>
+            <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
                 Import Preset
             </Heading>
 
@@ -51,10 +51,10 @@ return (
                     Explore Market Place
                 </Button>
             </Link>
-            <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mb = {8} mt={8}>
+            <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>
                 Import Preset Manuallly
             </Heading>
-            <Box w = {"full"} bg = "gray.700" p = {6} rounded = {"lg"} shadow = {"md"}>
+            <Box w = {"full"} bg = "gray.700" m = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
             <VStack spacing = {4}>
                 <Input 
                     placeholder = 'Preset Name' 

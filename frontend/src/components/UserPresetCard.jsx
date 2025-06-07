@@ -3,15 +3,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { VscCloudDownload } from 'react-icons/vsc';
 
-const PresetCard = ({preset}) => {
+const UserPresetCard = ({userPreset}) => {
     const handleDownload = () => {
-        const json = JSON.stringify(preset.settings, null, 2); // formatted JSON
+        const json = JSON.stringify(userPreset.settings, null, 2); // formatted JSON
         const blob = new Blob([json], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${preset.name || 'preset'}.json`;
+        a.download = `${userPreset.name || 'preset'}.json`;
         a.click();
         URL.revokeObjectURL(url); // clean up
     };
@@ -26,16 +26,16 @@ const PresetCard = ({preset}) => {
             m = {4}
         >
             <img
-                src={preset.image}
-                alt={preset.name}
+                src={userPreset.image}
+                alt={userPreset.name}
                 style={{ height: '250px', width: '100%', objectFit: 'cover', borderRadius: '8px' }}
             />
             <Box p = {4}>
                 <Heading as = 'h3' size = 'md' mb = {2}>
-                    {preset.name}
+                    {userPreset.name}
                 </Heading>
                 <HStack spacing = {2}>
-                    <Link to={`/preset/${preset._id}`}>
+                    <Link to={`/preset/${userPreset._id}`}>
                         <Text
                             as="span"
                             color="blue.500"
@@ -54,7 +54,7 @@ const PresetCard = ({preset}) => {
             </Box>
             
         </Box>
-    )
-};
+  )
+}
 
-export default PresetCard;
+export default UserPresetCard

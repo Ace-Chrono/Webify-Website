@@ -6,6 +6,7 @@ import CreatePage from './pages/CreatePage';
 import HomePage from './pages/HomePage';
 import AccountPage from './pages/AccountPage';
 import Navbar from './components/Navbar';
+import Footer from './components/footer';
 import PresetDetails from './pages/PresetDetailsPage';
 import ImportPage from './pages/ImportPage';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path = "/account" element = {<AccountPage />} />
         <Route path = "/preset/:id" element = {<PresetDetails />} />
       </Routes>
+      <Footer />
     </Box>
   );
 }
