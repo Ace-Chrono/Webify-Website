@@ -4,6 +4,7 @@ import { toaster } from "@/components/ui/toaster"
 import { usePresetStore } from '@/store/preset';
 import { useUserPresetStore } from '@/store/userPreset';
 import { useAuth } from "@clerk/clerk-react";
+import { Link } from 'react-router-dom';
 
 const UserPresetCard = ({userPreset}) => {
     const { getToken } = useAuth();
@@ -85,9 +86,25 @@ const UserPresetCard = ({userPreset}) => {
                 <Heading as = 'h3' size = 'md' mb = {2}>
                     {userPreset.name}
                 </Heading>
-                <Button onClick = {handlePublish}>
-                    Publish
-                </Button>
+                <HStack spacing = {2}>
+                    <Link to={`/userpreset/${userPreset._id}`}>
+                        <Text
+                            as="span"
+                            color="blue.500"
+                            _hover={{ textDecoration: 'underline' }}
+                        >
+                            View details
+                        </Text>
+                    </Link>
+
+                    <Spacer />
+
+                    {!userPreset.isPublished && (
+                        <Button onClick = {handlePublish}>
+                            Publish
+                        </Button>
+                    )}
+                </HStack>
             </Box>
             
         </Box>

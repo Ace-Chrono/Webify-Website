@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/footer';
 import PresetDetails from './pages/PresetDetailsPage';
 import ImportPage from './pages/ImportPage';
+import UserPresetDetails from './pages/UserPresetDetailsPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path = "/import" element = {<ImportPage />} />
             <Route path = "/account" element = {<AccountPage />} />
             <Route path = "/preset/:id" element = {<PresetDetails />} />
+            <Route path = "/userpreset/:id" element = {<UserPresetDetails />} />
           </Routes>
         </Box>
       <Footer />

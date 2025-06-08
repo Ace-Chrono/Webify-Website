@@ -1,11 +1,12 @@
 import express from "express";
 import upload from "../middleware/upload.js";
-import { createUserPreset, getUserPresets, updateUserPreset } from "../controllers/userPreset.controller.js";
+import { createUserPreset, getUserPreset, getUserPresets, updateUserPreset } from "../controllers/userPreset.controller.js";
 import requireAuth from "../middleware/clerkAuth.js";
 
 const router = express.Router();
 
 router.get("/", requireAuth, getUserPresets);
+router.get("/:id", requireAuth, getUserPreset);
 router.post(
     '/',
     requireAuth,

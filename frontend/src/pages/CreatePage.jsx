@@ -1,12 +1,14 @@
 import { usePresetStore } from '@/store/preset';
-import { VStack, Container, Heading, Box, Input, Button, FileUpload, SimpleGrid } from '@chakra-ui/react';
+import { VStack, Container, Heading, Box, Input, Button, FileUpload, SimpleGrid, Text } from '@chakra-ui/react';
 import { toaster } from "@/components/ui/toaster"
 import { HiUpload } from "react-icons/hi"
 import React, { useState, useEffect } from 'react';
 import { useUserPresetStore } from '@/store/userPreset';
 import UserPresetCard from '@/components/UserPresetCard';
+import { useAuth } from "@clerk/clerk-react";
 
 const CreatePage = () => {
+    const { getToken } = useAuth();
     const [newPreset, setNewPreset] = useState({
         name: "",
         settings: "",
@@ -14,18 +16,38 @@ const CreatePage = () => {
     });
 
     const { createPreset } = usePresetStore();
+    const { createUserPreset } = useUserPresetStore();
     const handleAddPreset = async() => {
-        const {success, message} = await createPreset(newPreset);
-        if(!success) {
+        const token = await getToken();
+        const {success, message, data: createdPreset } = await createPreset(newPreset);
+
+        if (!success) {
             toaster.create({
                 title: "Error",
-                description: message,
+                description: message || "Failed to create preset",
+                type: "error"
+            });
+            return;
+        }
+
+        const {success: successUser, message: messageUser} = await createUserPreset({
+            name: newPreset.name,
+            settings: newPreset.settings,
+            image: newPreset.image, 
+            isPublished: true,
+            sourcePresetId: createdPreset._id
+        }, token)
+
+        if(!successUser) {
+            toaster.create({
+                title: "Error",
+                description: messageUser,
                 type: "error"
             });
         } else {
             toaster.create({
                 title: "Success",
-                description: message,
+                description: messageUser,
                 type: "success"
             });
         }
@@ -63,6 +85,16 @@ const CreatePage = () => {
                         <UserPresetCard key = {userPreset._id} userPreset = {userPreset} />
                         ))}
                     </SimpleGrid>
+                    {userPresets.length === 0 && (
+                        <Text
+                            fontSize = 'xl'
+                            textAlign = {"center"}
+                            fontWeight = {"bold"}
+                            color = 'gray.500'
+                        >
+                            No user presets found
+                        </Text>
+                    )}
                 </Box>
 
                 <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>

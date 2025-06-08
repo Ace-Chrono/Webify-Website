@@ -29,6 +29,38 @@ export const getUserPresets = async (req, res) => {
   }
 };
 
+export const getUserPreset = async (req,res) => {
+    const {id} = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({ success: false, message: "Invalid preset Id"});
+    }
+
+    try {
+        const preset = await userPreset.findById(id);
+
+        if (!preset) {
+            return res.status(404).json({ success: false, message: 'Preset not found' });
+        }
+
+        const parsedPreset = {
+            _id: preset._id,
+            name: preset.name,
+            createdAt: preset.createdAt,
+            updatedAt: preset.updatedAt,
+            settings: JSON.parse(preset.settings.data.toString('utf8')),
+            image: `data:${preset.image.contentType};base64,${preset.image.data.toString('base64')}`,
+            isPublished: preset.isPublished,
+            sourcePresetId: preset.sourcePresetId
+        };
+
+        res.status(200).json({ success: true, data: parsedPreset });
+    } catch (error) {
+        console.log("Error in fetching preset:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+};
+
 export const createUserPreset = async (req, res) => {
   const name = req.body.name;
   const settingsFile = req.files?.settings?.[0];
