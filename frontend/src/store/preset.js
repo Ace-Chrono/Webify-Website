@@ -31,7 +31,7 @@ export const usePresetStore = create((set) => ({
             if (!res.ok) throw new Error(data.message || "Upload failed");
 
             set((state) => ({ presets: [...state.presets, data.data] }));
-            return { success: true, message: "Preset created successfully" };
+            return { success: true, message: "Preset created successfully", data: data.data };
         } catch (err) {
             console.error(err);
             return { success: false, message: err.message };

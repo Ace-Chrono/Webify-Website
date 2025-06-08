@@ -2,9 +2,13 @@ import { Box, Button, Heading, HStack, Text, Spacer } from '@chakra-ui/react'
 import React from 'react'
 import { toaster } from "@/components/ui/toaster"
 import { usePresetStore } from '@/store/preset';
+import { useUserPresetStore } from '@/store/userPreset';
+import { useAuth } from "@clerk/clerk-react";
 
 const UserPresetCard = ({userPreset}) => {
+    const { getToken } = useAuth();
     const { createPreset } = usePresetStore();
+    const { updateUserPreset } = useUserPresetStore();
     const handlePublish = async() => {
         const settingsBlob = new Blob(
             [JSON.stringify(userPreset.settings)], 
@@ -19,25 +23,48 @@ const UserPresetCard = ({userPreset}) => {
         const imageFile = new File([imageBlob], "image.png", {
             type: imageBlob.type || 'image/png'
         });
-        const {success, message} = await createPreset({
+        const {success, message, data: createdPreset } = await createPreset({
             name: userPreset.name,
             settings: settingsFile,
             image: imageFile
         });
 
-        if(!success) {
+        if (!success || !createdPreset?._id) {
             toaster.create({
                 title: "Error",
-                description: message,
+                description: message || "Failed to create preset",
                 type: "error"
             });
-        } else {
-            toaster.create({
-                title: "Success",
-                description: message,
-                type: "success"
-            });
+            return;
         }
+
+        const token = await getToken();
+
+        const {success: successUpdate, message: messageUpdate} = await updateUserPreset({
+            _id: userPreset._id,
+            name: userPreset.name,
+            settings: settingsFile,
+            image: imageFile,
+            isPublished: true,
+            sourcePresetId: createdPreset._id
+        }, token);
+
+        console.log({ successUpdate, messageUpdate });
+
+        if (!successUpdate) {
+            toaster.create({
+                title: "Error",
+                description: messageUpdate || "Failed to update user preset",
+                type: "error"
+            });
+            return;
+        }
+
+        toaster.create({
+            title: "Success",
+            description: "Preset published successfully.",
+            type: "success"
+        });
     };
 
     return (

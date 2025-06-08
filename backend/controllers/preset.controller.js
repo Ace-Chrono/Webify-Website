@@ -18,7 +18,7 @@ export const getPresets = async (req,res) => {
         console.log("Error in fetching presets:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
-}
+};
 
 export const getPreset = async (req,res) => {
     const {id} = req.params;
@@ -48,7 +48,7 @@ export const getPreset = async (req,res) => {
         console.log("Error in fetching preset:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
-}
+};
 
 export const createPreset = async (req, res) => {
     const name = req.body.name;
@@ -86,23 +86,40 @@ export const createPreset = async (req, res) => {
     }
 };
 
-//Need to fix to work with files
 export const updatePreset = async (req,res) => {
     const { id } = req.params;
-
-    const preset = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({ success: false, message: "Invalid preset Id"});
     }
 
     try {
-        const updatedPreset = await Preset.findByIdAndUpdate(id, preset, {new:true});
+        const updateFields = {};
+
+        if (req.body.name) updateFields.name = req.body.name;
+
+        if (req.files?.settings && req.files.settings.length > 0) {
+            updateFields.settings = {
+                data: req.files.settings[0].buffer,
+                contentType: req.files.settings[0].mimetype,
+                originalName: req.files.settings[0].originalname
+            };
+        }
+
+        if (req.files?.image && req.files.image.length > 0) {
+            updateFields.image = {
+                data: req.files.image[0].buffer,
+                contentType: req.files.image[0].mimetype,
+                originalName: req.files.image[0].originalname
+            };
+        }
+
+        const updatedPreset = await Preset.findByIdAndUpdate(id, updateFields, {new:true});
         res.status(200).json({ success: true, data: updatedPreset });
     } catch (error) {
         res.status(500).json({ success: false, message: "Server Error" });
     }
-}
+};
 
 export const deletePreset = async (req,res) => {
     const {id} = req.params;
@@ -118,4 +135,4 @@ export const deletePreset = async (req,res) => {
         console.log("Error in deleting product:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
-}
+};

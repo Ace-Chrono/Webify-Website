@@ -70,3 +70,49 @@ export const createUserPreset = async (req, res) => {
       res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const updateUserPreset = async (req,res) => {
+  const { id } = req.params;
+  const name = req.body.name;
+  const settingsFile = req.files?.settings?.[0];
+  const imageFile = req.files?.image?.[0];
+  const clerkId = req.auth?.userId;
+  const isPublished = req.body.isPublished;
+  const sourcePresetId = req.body.sourcePresetId;
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({ success: false, message: "Invalid preset Id"});
+  }
+
+  if (!clerkId) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+
+  if (!name || !settingsFile || !imageFile || isPublished === undefined) {
+      return res.status(400).json({ success: false, message: "Please provide all fields" });
+  }
+
+  const updateFields = {
+      name,
+      clerkId,
+      settings: {
+          data: settingsFile.buffer,
+          contentType: settingsFile.mimetype,
+          originalName: settingsFile.originalname,
+      },
+      image: {
+          data: imageFile.buffer,
+          contentType: imageFile.mimetype,
+          originalName: imageFile.originalname,
+      },
+      isPublished,
+      sourcePresetId: sourcePresetId || undefined
+  };
+
+  try {
+      const updatedUserPreset = await userPreset.findByIdAndUpdate(id, updateFields, {new:true});
+      res.status(200).json({ success: true, data: updatedUserPreset });
+  } catch (error) {
+      res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
