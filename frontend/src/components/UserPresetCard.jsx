@@ -66,6 +66,10 @@ const UserPresetCard = ({userPreset}) => {
             description: "Preset published successfully.",
             type: "success"
         });
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     };
 
     return (

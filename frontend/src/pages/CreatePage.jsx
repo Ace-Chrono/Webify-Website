@@ -52,6 +52,9 @@ const CreatePage = () => {
             });
         }
 
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
     };
 
     const {fetchUserPresets, userPresets} = useUserPresetStore();
