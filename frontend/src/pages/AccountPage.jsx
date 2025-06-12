@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from '@clerk/clerk-react';
 import { VStack, Container, Heading, Box, Button, Text, SimpleGrid, HStack } from '@chakra-ui/react';
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useClerk} from "@clerk/clerk-react";
 import { useUserPresetStore } from '@/store/userPreset';
 import UserPresetCard from '@/components/UserPresetCard';
 
 const AccountPage = () => {
   const { user } = useUser();
+  const { openUserProfile } = useClerk();
   const {fetchUserPresets, userPresets} = useUserPresetStore();
     useEffect(() =>{
         fetchUserPresets();
@@ -39,6 +40,9 @@ const AccountPage = () => {
                   Date Joined: {new Date(user.createdAt).toLocaleDateString()}
                 </Text>
                 <Text fontSize="lg">User ID: {user.id}</Text>
+                <Button onClick={() => openUserProfile()} mt = {4}>
+                  Edit Account Info
+                </Button>
               </Box>
               <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mb = {4} mt={4}>
                 Presets
@@ -68,7 +72,9 @@ const AccountPage = () => {
                   </Text>
                 )}
               </Box>
-              <SignOutButton redirectUrl="/" />
+              <SignOutButton redirectUrl="/" >
+                <Button>Sign Out</Button>
+              </SignOutButton>
             </>
           )}
           

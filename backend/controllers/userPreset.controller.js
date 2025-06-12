@@ -148,3 +148,24 @@ export const updateUserPreset = async (req,res) => {
       res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const deleteUserPreset = async (req,res) => {
+    const {id} = req.params;
+    const clerkId = req.auth?.userId;
+
+    if (!clerkId) {
+        return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+    
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({ success: false, message: "Invalid preset Id"});
+    }
+    
+    try {
+        await userPreset.findByIdAndDelete(id);
+        res.status(200).json({ success: true, message: "Preset deleted" });
+    } catch (error) {
+        console.log("Error in deleting product:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+};

@@ -96,5 +96,19 @@ export const useUserPresetStore = create((set) => ({
             console.error(err);
             return { success: false, message: err.message };
         }
+    },
+    deleteUserPreset: async (pid,  token) => {
+        const res = await fetch(`/api/userpresets/${pid}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        const data = await res.json();
+        if (!data.success) {
+            return {success: false, message: data.message };
+        }
+        set(state => ({ userPresets: state.userPresets.filter(userPreset => userPreset._id !== pid) }));
+        return { success: true, message: data.message };
     }
 }));

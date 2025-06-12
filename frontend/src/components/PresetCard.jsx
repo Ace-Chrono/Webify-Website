@@ -80,7 +80,7 @@ const PresetCard = ({preset}) => {
                     <Spacer />
 
                     <Button onClick = {handleDownload}>
-                        <VscCloudDownload  />
+                        Import
                     </Button>
                 </HStack>
             </Box>

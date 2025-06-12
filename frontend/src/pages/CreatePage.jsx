@@ -1,7 +1,7 @@
 import { usePresetStore } from '@/store/preset';
 import { VStack, Container, Heading, Box, Input, Button, FileUpload, SimpleGrid, Text } from '@chakra-ui/react';
-import { toaster } from "@/components/ui/toaster"
-import { HiUpload } from "react-icons/hi"
+import { toaster } from "@/components/ui/toaster";
+import { HiUpload } from "react-icons/hi";
 import React, { useState, useEffect } from 'react';
 import { useUserPresetStore } from '@/store/userPreset';
 import UserPresetCard from '@/components/UserPresetCard';

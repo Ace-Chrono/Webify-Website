@@ -1,6 +1,6 @@
 import express from "express";
 import upload from "../middleware/upload.js";
-import { createUserPreset, getUserPreset, getUserPresets, updateUserPreset } from "../controllers/userPreset.controller.js";
+import { createUserPreset, getUserPreset, getUserPresets, updateUserPreset, deleteUserPreset } from "../controllers/userPreset.controller.js";
 import requireAuth from "../middleware/clerkAuth.js";
 
 const router = express.Router();
@@ -23,6 +23,8 @@ router.put(
         { name: 'image', maxCount: 1 },
         { name: 'settings', maxCount: 1 }
     ]),
-    updateUserPreset);
+    updateUserPreset
+);
+router.delete("/:id", requireAuth, deleteUserPreset);
 
 export default router;
