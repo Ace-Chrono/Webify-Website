@@ -63,8 +63,10 @@ const CreatePage = () => {
     }, [fetchUserPresets]);
     console.log("User Presets", userPresets)
 
+    const unpublishedPresets = userPresets.filter(preset => !preset.isPublished);
+
     return (
-        <Container maxW={"container.sm"}>
+        <Container>
             <VStack spacing = {8}>
                 <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
                     Publish Preset
@@ -84,8 +86,8 @@ const CreatePage = () => {
                         spacing = {10}
                         w = {"full"}
                     >
-                        {userPresets.map((userPreset) => (
-                        <UserPresetCard key = {userPreset._id} userPreset = {userPreset} />
+                        {unpublishedPresets.map((userPreset) => (
+                            <UserPresetCard key = {userPreset._id} userPreset = {userPreset} />
                         ))}
                     </SimpleGrid>
                     {userPresets.length === 0 && (
@@ -96,6 +98,16 @@ const CreatePage = () => {
                             color = 'gray.500'
                         >
                             No user presets found
+                        </Text>
+                    )}
+                    {unpublishedPresets.length === 0 && (
+                        <Text
+                            fontSize = 'xl'
+                            textAlign = {"center"}
+                            fontWeight = {"bold"}
+                            color = 'gray.500'
+                        >
+                            No unpublished presets found
                         </Text>
                     )}
                 </Box>

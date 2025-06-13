@@ -15,7 +15,7 @@ const AccountPage = () => {
   console.log("User Presets", userPresets)
 
   return (
-    <Container py={8} maxW="container.lg">
+    <Container py={8}>
       <VStack spacing={4} align="start">
         <SignedOut>
           <Text fontSize="xl">You are not signed in.</Text>

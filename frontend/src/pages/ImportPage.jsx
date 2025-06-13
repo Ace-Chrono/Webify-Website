@@ -37,7 +37,7 @@ const ImportPage = () => {
     };
 
 return (
-    <Container maxW={"container.sm"}>
+    <Container>
         <VStack spacing = {8}>
             <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
                 Import Preset

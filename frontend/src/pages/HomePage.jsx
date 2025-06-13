@@ -21,7 +21,7 @@ const HomePage = () => {
   console.log("presets", presets)
 
   return (
-    <Container maxW = 'container.xl'>
+    <Container>
       <VStack spacing = {8}>
         <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
           Browse Presets

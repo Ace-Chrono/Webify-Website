@@ -1,4 +1,4 @@
-import { Box, Text, Code, Heading, Button, HStack, Spacer } from '@chakra-ui/react';
+import { Box, Text, Stack, Heading, Button, HStack, Spacer, Container } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -85,21 +85,21 @@ const UserPresetDetails = () => {
   if (!preset) return <Text>Loading...</Text>;
 
   return (
-    <Box p={8}>
-      <Heading mb={4}>{preset.name}</Heading>
+    <Container>
+      <Heading size = {'3xl'} mb = {8} mt={8}> {preset.name}</Heading>
+      <img
+          src={preset.image}
+          alt={preset.name}
+          style={{
+            width: '100%',               // Not full width, but fills most of the page
+            aspectRatio: '16 / 9',      // Keeps 1920×1080 ratio
+            objectFit: 'cover',
+            borderRadius: '8px',
+            display: 'block',           // Needed to center with margin
+            margin: '0 auto'            // Centers the image horizontally
+          }}
+      />
 
-      <Text fontWeight="bold" mb={2}>Settings:</Text>
-      <Box
-        p={4}
-        bg="gray.100"
-        borderRadius="md"
-        overflowX="auto"
-        whiteSpace="pre-wrap"
-      >
-        <Code whiteSpace="pre" bg="blue.500">
-          {JSON.stringify(preset.settings, null, 2)}
-        </Code>
-      </Box>
       <HStack>
         <Link to="/">
           <Button mt={4}>
@@ -119,8 +119,40 @@ const UserPresetDetails = () => {
           Delete
         </Button>
       </HStack>
-      
-    </Box>
+
+       <Box mt={8} mb={4}>
+        <Text fontWeight="bold" fontSize="xl" mb={2}>
+          Details:
+        </Text>
+
+        <Stack spacing={1} fontSize="md">
+          <Text>
+            <strong>Published:</strong>{' '}
+            {preset.isPublished ? 'Yes' : 'No'}
+          </Text>
+          <Text>
+            <strong>Date Created:</strong>{' '}
+            {preset.createdAt
+              ? new Date(preset.createdAt).toLocaleString()
+              : 'Unknown'}
+          </Text>
+        </Stack>
+      </Box>
+
+      <Text fontSize="xl" fontWeight="bold" mt = {8} mb={4}>Settings:</Text>
+      <Box
+        p={4}
+        bg="gray.900"
+        color="white"
+        borderRadius="md"
+        overflowX="auto"
+        whiteSpace="pre-wrap"
+        width="100%"
+        mb = {8}
+      >
+        {JSON.stringify(preset.settings, null, 2)}
+      </Box>
+    </Container>
   );
 };
 
