@@ -6,7 +6,7 @@ import CreatePage from './pages/CreatePage';
 import HomePage from './pages/HomePage';
 import AccountPage from './pages/AccountPage';
 import Navbar from './components/Navbar';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import PresetDetails from './pages/PresetDetailsPage';
 import ImportPage from './pages/ImportPage';
 import UserPresetDetails from './pages/UserPresetDetailsPage';

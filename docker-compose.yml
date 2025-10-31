@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  backend:
+    build: ./backend
+    container_name: mern-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://richardszhao:8Ah8l9cnmutos6nd@cluster0.v2tyczb.mongodb.net/presets?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_URI_2=mongodb+srv://richardszhao:8Ah8l9cnmutos6nd@cluster0.v2tyczb.mongodb.net/userPresets?retryWrites=true&w=majority&appName=Cluster0
+      - CLERK_SECRET_KEY=sk_test_u1rlLKI04M6S8DF99d5aHsLugBJNJxK7B3qtVgGDBc
+      - PORT=5000
+    networks:
+      - mern-net
+
+  frontend:
+    build: ./frontend
+    container_name: mern-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_CLERK_FRONTEND_API=https://open-koi-77.clerk.accounts.dev
+      - VITE_CLERK_PUBLISHABLE_KEY=pk_test_b3Blbi1rb2ktNzcuY2xlcmsuYWNjb3VudHMuZGV2JA
+      - REACT_APP_BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
+    networks:
+      - mern-net
+
+networks:
+  mern-net:

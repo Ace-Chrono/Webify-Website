@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
 import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from '@clerk/clerk-react';
 import { VStack, Container, Heading, Box, Button, Text, SimpleGrid, HStack } from '@chakra-ui/react';
-import { useUser, useClerk} from "@clerk/clerk-react";
+import { useUser, useClerk, useAuth } from "@clerk/clerk-react";
 import { useUserPresetStore } from '@/store/userPreset';
 import UserPresetCard from '@/components/UserPresetCard';
 
 const AccountPage = () => {
   const { user } = useUser();
   const { openUserProfile } = useClerk();
+  const { getToken } = useAuth();
   const {fetchUserPresets, userPresets} = useUserPresetStore();
     useEffect(() =>{
-        fetchUserPresets();
-    }, [fetchUserPresets]);
+      const getUserPresets = async () => {
+        const token = await getToken();
+        console.log("Token:", token);
+        fetchUserPresets(token);
+      }  
+      getUserPresets();
+    }, [fetchUserPresets, getToken]);
   console.log("User Presets", userPresets)
 
   return (

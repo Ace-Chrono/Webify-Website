@@ -87,7 +87,7 @@ const HomePage = () => {
             <Link to = "/create">
               <Text 
                 as = 'span'
-                color = 'blue.500'
+                color = 'white'
                 _hover = {{ textDecoration: "underline" }}
               >
                 Create a preset

@@ -54,7 +54,7 @@ return (
             <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>
                 Import Preset Manuallly
             </Heading>
-            <Box w = {"full"} bg = "gray.700" m = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
+            <Box minW = "800px" maxW = {"full"} bg = "gray.700" m = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
             <VStack spacing = {4}>
                 <Input 
                     placeholder = 'Preset Name' 
@@ -74,7 +74,7 @@ return (
                     <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
                             <Button variant="outline" size="sm">
-                                <HiUpload /> Upload file
+                                <HiUpload /> Upload JSON Settings
                             </Button>
                         </FileUpload.Trigger>
                     <FileUpload.List />
@@ -91,7 +91,7 @@ return (
                     <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
                             <Button variant="outline" size="sm">
-                                <HiUpload /> Upload file
+                                <HiUpload /> Upload Image Cover
                             </Button>
                         </FileUpload.Trigger>
                     <FileUpload.List />

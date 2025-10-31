@@ -45,8 +45,13 @@ export const useUserPresetStore = create((set) => ({
             return { success: false, message: err.message };
         }
     },
-    fetchUserPresets: async () => {
-        const res = await fetch("/api/userpresets");
+    fetchUserPresets: async (token) => {
+        const res = await fetch(`/api/userpresets`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
         const data = await res.json();
         set({ userPresets: data.data});
     },

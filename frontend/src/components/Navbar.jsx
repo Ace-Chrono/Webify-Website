@@ -16,10 +16,9 @@ const Navbar = () => {
             <Text
                 fontSize={{ base: "22px", sm: "28px" }}
                 fontWeight="bold"
-                textTransform="uppercase"
-                color="blue.500"
+                color="white"
             >
-                Webify Market Place
+                Webify
             </Text>
         </Link>
 
