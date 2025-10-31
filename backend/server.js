@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ["http://localhost:5173", "https://webify-website.vercel.app/"] // allow your frontend
+  origin: ["http://localhost:5173", "https://webify-website.vercel.app"] // allow your frontend
 }));
 
 const PORT = process.env.PORT || 5000;
