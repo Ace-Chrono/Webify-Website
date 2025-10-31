@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+
 export const usePresetStore = create((set) => ({
     presets: [],
     setPresets: (presets) => set({ presets }), 
@@ -22,7 +24,7 @@ export const usePresetStore = create((set) => ({
         }
 
         try {
-            const res = await fetch("/api/presets", {
+            const res = await fetch(`${API_BASE_URL}/api/presets`, {
             method: "POST",
             body: formData,
             });
@@ -38,12 +40,12 @@ export const usePresetStore = create((set) => ({
         }
     },
     fetchPresets: async () => {
-        const res = await fetch("/api/presets");
+        const res = await fetch(`${API_BASE_URL}/api/presets`);
         const data = await res.json();
         set({ presets: data.data});
     },
     deletePreset: async (pid) => {
-        const res = await fetch(`/api/presets/${pid}`, {
+        const res = await fetch(`${API_BASE_URL}/api/presets/${pid}`, {
             method: "DELETE"
         });
         const data = await res.json();

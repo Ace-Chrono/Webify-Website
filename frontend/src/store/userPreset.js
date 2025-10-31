@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "";
+
 export const useUserPresetStore = create((set) => ({
     userPresets: [],
     setUserPresets: (userPresets) => set({ userPresets }), 
@@ -27,7 +29,7 @@ export const useUserPresetStore = create((set) => ({
         console.log(token);
 
         try {
-            const res = await fetch("/api/userpresets", {
+            const res = await fetch(`${API_BASE_URL}/api/userpresets`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -46,7 +48,7 @@ export const useUserPresetStore = create((set) => ({
         }
     },
     fetchUserPresets: async (token) => {
-        const res = await fetch(`/api/userpresets`, {
+        const res = await fetch(`${API_BASE_URL}/api/userpresets`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -79,7 +81,7 @@ export const useUserPresetStore = create((set) => ({
         console.log(token);
 
         try {
-            const res = await fetch(`/api/userpresets/${newUserPreset._id}`, {
+            const res = await fetch(`${API_BASE_URL}/api/userpresets/${newUserPreset._id}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -103,7 +105,7 @@ export const useUserPresetStore = create((set) => ({
         }
     },
     deleteUserPreset: async (pid,  token) => {
-        const res = await fetch(`/api/userpresets/${pid}`, {
+        const res = await fetch(`${API_BASE_URL}/api/userpresets/${pid}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
