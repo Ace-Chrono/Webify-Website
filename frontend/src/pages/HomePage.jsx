@@ -42,6 +42,26 @@ const HomePage = () => {
           Featured Themes
         </Heading>
 
+        {presets.length === 0 && (
+          <Text
+            fontSize = 'xl'
+            textAlign = {"center"}
+            fontWeight = {"bold"}
+            color = 'black'
+          >
+            No presets found{" "}
+            <Link to = "/create">
+              <Text 
+                as = 'span'
+                color = 'blue.400'
+                _hover = {{ color: 'blue.600' }}
+              >
+                Create a preset
+              </Text>
+            </Link>
+          </Text>
+        )}
+
         <SimpleGrid
           columns = {{
             base: 1,
@@ -96,26 +116,6 @@ const HomePage = () => {
             </Pagination.NextTrigger>
           </ButtonGroup>
         </Pagination.Root>
-
-        {presets.length === 0 && (
-          <Text
-            fontSize = 'xl'
-            textAlign = {"center"}
-            fontWeight = {"bold"}
-            color = 'black'
-          >
-            No presets found{" "}
-            <Link to = "/create">
-              <Text 
-                as = 'span'
-                color = 'blue.400'
-                _hover = {{ color: 'blue.600' }}
-              >
-                Create a preset
-              </Text>
-            </Link>
-          </Text>
-        )}
       </VStack>
     </Container>
   )
