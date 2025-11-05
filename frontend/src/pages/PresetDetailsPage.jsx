@@ -52,7 +52,7 @@ const PresetDetails = () => {
 
       <HStack>
         <Link to="/">
-          <Button mt={4} bg={"black"} color={"white"}>
+          <Button mt={4} bg={"black"} color={"white"} _hover={{ bg: "gray.700" }}>
             Return to Homepage
           </Button>
         </Link>

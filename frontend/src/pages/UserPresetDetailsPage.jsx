@@ -195,7 +195,7 @@ const UserPresetDetails = () => {
           >
             <FileUpload.HiddenInput />
               <FileUpload.Trigger asChild>
-                <Button variant="outline" size="xl" bg = "gray.900" color={"white"}>
+                <Button variant="outline" size="xl" bg = "black" _hover={{ bg: "gray.700" }} color={"white"}>
                   <LuPencilLine />
                 </Button>
               </FileUpload.Trigger>
@@ -206,14 +206,14 @@ const UserPresetDetails = () => {
 
       <HStack>
         <Link to="/">
-          <Button mt={4} bg={"black"} color={"white"}>
+          <Button mt={4} bg={"black"} color={"white"} _hover={{ bg: "gray.700" }}>
             Return to Homepage
           </Button>
         </Link>
 
         <Spacer />
 
-        <Button mt={4} bg={"black"} color={"white"} onClick={handleDelete}>
+        <Button mt={4} bg={"black"} color={"white"} _hover={{ bg: "gray.700" }} onClick={handleDelete}>
           Delete
         </Button>
       </HStack>
@@ -251,7 +251,7 @@ const UserPresetDetails = () => {
           >
             <FileUpload.HiddenInput />
               <FileUpload.Trigger asChild>
-                <Button variant="outline" size="xl" bg = "gray.900" color={"white"}>
+                <Button variant="outline" size="xl" bg = "black" _hover={{ bg: "gray.700" }} color={"white"}>
                   <LuPencilLine />
                 </Button>
               </FileUpload.Trigger>
