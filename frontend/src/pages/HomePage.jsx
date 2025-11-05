@@ -44,16 +44,18 @@ const HomePage = () => {
 
         {presets.length === 0 && (
           <Container
-            minWidth={'400px'}
+            maxWidth={'400px'}
+            minH={'64px'}
             bg = "gray.950"
             borderRadius="xl"
             shadow={'md'}
+            alignContent={'center'}
           >
             <Text
               fontSize = 'xl'
               textAlign = {"center"}
               fontWeight = {"bold"}
-              color = 'black'
+              color = 'white'
             >
               No presets found.{" "}
               <Link to = "/create">
