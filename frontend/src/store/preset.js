@@ -44,6 +44,14 @@ export const usePresetStore = create((set) => ({
         const data = await res.json();
         set({ presets: data.data});
     },
+    fetchPreset: async (pid) => {
+        const res = await fetch(`${API_BASE_URL}/api/presets/${pid}`);
+        const data = await res.json();
+        if (!data.success) {
+            return {success: false, message: data.message };
+        }
+        return { success: true, message: data.message, data: data.data };
+    },
     deletePreset: async (pid) => {
         const res = await fetch(`${API_BASE_URL}/api/presets/${pid}`, {
             method: "DELETE"

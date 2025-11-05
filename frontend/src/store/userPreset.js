@@ -57,6 +57,19 @@ export const useUserPresetStore = create((set) => ({
         const data = await res.json();
         set({ userPresets: data.data});
     },
+    fetchUserPreset: async (pid, token) => {
+        const res = await fetch(`${API_BASE_URL}/api/userpresets/${pid}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        const data = await res.json();
+        if (!data.success) {
+            return {success: false, message: data.message };
+        }
+        return { success: true, message: data.message, data: data.data };
+    },
     updateUserPreset: async (newUserPreset, token) => {
         if(!newUserPreset._id || !newUserPreset.name || !newUserPreset.settings || !newUserPreset.image || newUserPreset.isPublished === undefined) {
             return {success: false, message: "Please fill in all fields."};
@@ -104,7 +117,7 @@ export const useUserPresetStore = create((set) => ({
             return { success: false, message: err.message };
         }
     },
-    deleteUserPreset: async (pid,  token) => {
+    deleteUserPreset: async (pid, token) => {
         const res = await fetch(`${API_BASE_URL}/api/userpresets/${pid}`, {
             method: "DELETE",
             headers: {

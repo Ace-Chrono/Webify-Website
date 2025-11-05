@@ -2,22 +2,23 @@ import { Box, Text, Container, Heading, Button, HStack, Stack } from '@chakra-ui
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { usePresetStore } from '@/store/preset';
 
 const PresetDetails = () => {
   const { id } = useParams();
   const [preset, setPreset] = useState(null);
   const [error, setError] = useState(null);
+  const { fetchPreset } = usePresetStore();
 
   useEffect(() => {
     const getPreset = async () => {
       try {
-        const response = await fetch(`/api/presets/${id}`);
-        const result = await response.json();
+        const {success, message, data} = await fetchPreset(id);
 
-        if (result.success) {
-          setPreset(result.data);
+        if (success) {
+          setPreset(data);
         } else {
-          setError("Preset not found.");
+          setError(message);
         }
       } catch (err) {
         console.error(err);
@@ -26,7 +27,7 @@ const PresetDetails = () => {
     };
 
     getPreset();
-  }, [id]);
+  }, [fetchPreset, id]);
 
   if (error) return <Text color="red.500">{error}</Text>;
   if (!preset) return <Text>Loading...</Text>;

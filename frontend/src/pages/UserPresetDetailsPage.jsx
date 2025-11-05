@@ -13,24 +13,19 @@ const UserPresetDetails = () => {
   const { id } = useParams();
   const [preset, setPreset] = useState(null);
   const [error, setError] = useState(null);
+  const { fetchUserPreset } = useUserPresetStore();
   const { getToken } = useAuth();
 
   useEffect(() => {
     const getPreset = async () => {
       try {
         const token = await getToken();
-        console.log("Token:", token);
-        const response = await fetch(`/api/userpresets/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        const result = await response.json();
+        const {success, message, data} = await fetchUserPreset(id, token);
 
-        if (result.success) {
-          setPreset(result.data);
+        if (success) {
+          setPreset(data);
         } else {
-          setError("Preset not found.");
+          setError(message);
         }
       } catch (err) {
         console.error(err);
@@ -39,7 +34,7 @@ const UserPresetDetails = () => {
     };
 
     getPreset();
-  }, [id, getToken]);
+  }, [id, getToken, fetchUserPreset]);
 
   const { deletePreset } = usePresetStore();
   const { deleteUserPreset } = useUserPresetStore();
@@ -211,14 +206,14 @@ const UserPresetDetails = () => {
 
       <HStack>
         <Link to="/">
-          <Button mt={4}>
+          <Button mt={4} bg={"black"} color={"white"}>
             Return to Homepage
           </Button>
         </Link>
 
         <Spacer />
 
-        <Button mt={4} onClick={handleDelete}>
+        <Button mt={4} bg={"black"} color={"white"} onClick={handleDelete}>
           Delete
         </Button>
       </HStack>
