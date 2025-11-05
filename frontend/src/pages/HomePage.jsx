@@ -43,23 +43,32 @@ const HomePage = () => {
         </Heading>
 
         {presets.length === 0 && (
-          <Text
-            fontSize = 'xl'
-            textAlign = {"center"}
-            fontWeight = {"bold"}
-            color = 'black'
+          <Container
+            minWidth={'400px'}
+            bg = "gray.950"
+            borderRadius="xl"
+            shadow={'md'}
           >
-            No presets found{" "}
-            <Link to = "/create">
-              <Text 
-                as = 'span'
-                color = 'blue.400'
-                _hover = {{ color: 'blue.600' }}
-              >
-                Create a preset
-              </Text>
-            </Link>
-          </Text>
+            <Text
+              fontSize = 'xl'
+              textAlign = {"center"}
+              fontWeight = {"bold"}
+              color = 'black'
+            >
+              No presets found.{" "}
+              <Link to = "/create">
+                <Text 
+                  as = 'span'
+                  color = 'blue.400'
+                  _hover = {{ color: 'blue.600' }}
+                >
+                  Create a preset
+                </Text>
+              </Link>
+            </Text>
+          </Container>
+
+          
         )}
 
         <SimpleGrid
