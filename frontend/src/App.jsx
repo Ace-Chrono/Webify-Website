@@ -13,7 +13,10 @@ import UserPresetDetails from './pages/UserPresetDetailsPage';
 
 function App() {
   return (
-    <Flex minH="100vh" direction="column" bg="gray.800">
+    <Flex minH="100vh" 
+      direction="column" 
+      bg = "gray.100"
+    >
       <Navbar />
       <Toaster />
         <Box flex = "1">

@@ -144,7 +144,9 @@ const UserPresetDetails = () => {
   if (!preset) return <Text>Loading...</Text>;
 
   return (
-    <Container>
+    <Container
+      color={"black"}
+    >
       <Editable.Root 
         defaultValue={preset.name} mb = {8} mt={8} 
         onValueCommit={(event) => {
@@ -198,7 +200,7 @@ const UserPresetDetails = () => {
           >
             <FileUpload.HiddenInput />
               <FileUpload.Trigger asChild>
-                <Button variant="outline" size="xl" bg = "gray.900">
+                <Button variant="outline" size="xl" bg = "gray.900" color={"white"}>
                   <LuPencilLine />
                 </Button>
               </FileUpload.Trigger>
@@ -254,7 +256,7 @@ const UserPresetDetails = () => {
           >
             <FileUpload.HiddenInput />
               <FileUpload.Trigger asChild>
-                <Button variant="outline" size="xl" bg = "gray.900">
+                <Button variant="outline" size="xl" bg = "gray.900" color={"white"}>
                   <LuPencilLine />
                 </Button>
               </FileUpload.Trigger>

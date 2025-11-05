@@ -1,5 +1,5 @@
 import { usePresetStore } from '@/store/preset';
-import { VStack, Container, Heading, Box, Input, Button, FileUpload, SimpleGrid, Text } from '@chakra-ui/react';
+import { VStack, Container, Heading, Box, Input, Button, FileUpload, SimpleGrid, Text, HStack } from '@chakra-ui/react';
 import { toaster } from "@/components/ui/toaster";
 import { HiUpload } from "react-icons/hi";
 import React, { useState, useEffect } from 'react';
@@ -66,17 +66,25 @@ const CreatePage = () => {
     const unpublishedPresets = userPresets.filter(preset => !preset.isPublished);
 
     return (
-        <Container>
+        <Container
+            color="black"
+        >
             <VStack spacing = {8}>
-                <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
+                <Heading as = {"h1"} size = {"5xl"} fontWeight = "semibold" textAlign = {"center"} mt={16}>
                     Publish Preset
                 </Heading>
 
-                <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mb = {8} mt={8}>
-                    Publish Preset from Account
+                <Heading
+                    as="h2"
+                    size="2xl"
+                    mt={16}
+                    mb={4}
+                    textAlign="center"
+                >
+                    Publish from account
                 </Heading>
 
-                <Box maxH="640px" overflowY="auto" p={2} border="1px solid" borderColor="gray.700" borderRadius="md">
+                <Box minW="600px" maxH="640px" overflowY="auto" p={2} border="1px solid" bg = "gray.950" borderRadius="xl" shadow={'md'}>
                     <SimpleGrid
                         columns = {{
                         base: 1,
@@ -90,75 +98,78 @@ const CreatePage = () => {
                             <UserPresetCard key = {userPreset._id} userPreset = {userPreset} />
                         ))}
                     </SimpleGrid>
-                    {userPresets.length === 0 && (
-                        <Text
-                            fontSize = 'xl'
-                            textAlign = {"center"}
-                            fontWeight = {"bold"}
-                            color = 'gray.500'
-                        >
-                            No user presets found
-                        </Text>
-                    )}
                     {unpublishedPresets.length === 0 && (
                         <Text
                             fontSize = 'xl'
                             textAlign = {"center"}
-                            fontWeight = {"bold"}
-                            color = 'gray.500'
+                            fontWeight = {"semibold"}
+                            color = "white"
                         >
                             No unpublished presets found
                         </Text>
                     )}
                 </Box>
 
-                <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>
-                    Publish Preset Manually
+                <Heading
+                    as="h2"
+                    size="2xl"
+                    mt={16}
+                    mb={4}
+                    textAlign="center"
+                >
+                    Publish manually
                 </Heading>
 
-                <Box minW = "800px" maxW = {"full"} bg = "gray.700" m = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
+                <Box minW = "600px" maxW = {"full"} bg = "gray.900" mb = {8} p = {6} rounded = {"xl"} shadow = {"md"}>
                     <VStack spacing = {4}>
                         <Input 
                             placeholder = 'Preset Name' 
+                            color = "white"
                             name = 'name' 
                             value = {newPreset.name}
                             onChange = {(e) => setNewPreset({ ...newPreset, name: e.target.value})}
                         />
-                        <FileUpload.Root 
-                            accept={[".json"]}
-                            onFileChange= {(details) => {
-                                const files = details.acceptedFiles;
-                                if (files.length > 0) {
-                                    setNewPreset({ ...newPreset, settings: files[0] });
-                                }
-                            }}
+                        <HStack
+                            spacing={4}
+                            justify={"center"}
+                            align="stretch" 
+                            w="full"
                         >
-                            <FileUpload.HiddenInput />
+                            <FileUpload.Root 
+                                accept={[".json"]}
+                                onFileChange= {(details) => {
+                                    const files = details.acceptedFiles;
+                                    if (files.length > 0) {
+                                        setNewPreset({ ...newPreset, settings: files[0] });
+                                    }
+                                }}
+                            >
+                                <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
-                                    <Button variant="outline" size="sm">
-                                        <HiUpload /> Upload JSON Settings
+                                    <Button variant="outline" size="sm" w="full">
+                                        {newPreset.settings ? newPreset.settings.name : "Upload JSON Settings"}
                                     </Button>
                                 </FileUpload.Trigger>
-                            <FileUpload.List />
-                        </FileUpload.Root>
-                        <FileUpload.Root 
-                            accept={["image/*"]}
-                            onFileChange= {(details) => {
-                                const files = details.acceptedFiles;
-                                if (files.length > 0) {
-                                    setNewPreset({ ...newPreset, image: files[0] });
-                                }
-                            }}
-                        >
-                            <FileUpload.HiddenInput />
+                            </FileUpload.Root>
+                            <FileUpload.Root 
+                                accept={["image/*"]}
+                                onFileChange= {(details) => {
+                                    const files = details.acceptedFiles;
+                                    if (files.length > 0) {
+                                        setNewPreset({ ...newPreset, image: files[0] });
+                                    }
+                                }}
+                            >
+                                <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
-                                    <Button variant="outline" size="sm">
-                                        <HiUpload /> Upload Image Cover
+                                    <Button variant="outline" size="sm" w="full">
+                                        {newPreset.image ? newPreset.image.name : "Upload Image Cover"}
                                     </Button>
                                 </FileUpload.Trigger>
-                            <FileUpload.List />
-                        </FileUpload.Root>
-                        <Button bg = "blue.500" onClick = {handleAddPreset} w = 'full'>
+                            </FileUpload.Root>
+                        </HStack>
+                        
+                        <Button bg = "white" _hover={{ bg: "gray.300" }} onClick = {handleAddPreset} w = 'full'>
                             Publish Preset
                         </Button>
                     </VStack>

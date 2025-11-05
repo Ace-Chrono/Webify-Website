@@ -32,7 +32,9 @@ const PresetDetails = () => {
   if (!preset) return <Text>Loading...</Text>;
 
   return (
-    <Container>
+    <Container
+      color={"black"}
+    >
       <Heading size = {'3xl'} mb = {8} mt={8}> {preset.name}</Heading>
       <img
           src={preset.image}
@@ -49,7 +51,7 @@ const PresetDetails = () => {
 
       <HStack>
         <Link to="/">
-          <Button mt={4}>
+          <Button mt={4} bg={"black"} color={"white"}>
             Return to Homepage
           </Button>
         </Link>

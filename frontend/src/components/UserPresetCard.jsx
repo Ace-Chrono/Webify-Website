@@ -80,6 +80,7 @@ const UserPresetCard = ({userPreset}) => {
             transition = 'all 0.3s'
             _hover = {{ transform: "translateY(-5px)", shadow: "xl" }}
             m = {4}
+            color={"white"}
         >
             <img
                 src={userPreset.image}
@@ -94,8 +95,8 @@ const UserPresetCard = ({userPreset}) => {
                     <Link to={`/userpreset/${userPreset._id}`}>
                         <Text
                             as="span"
-                            color="blue.500"
-                            _hover={{ textDecoration: 'underline' }}
+                            color="blue.400"
+                            _hover={{ color: 'blue.600' }}
                         >
                             View details
                         </Text>
@@ -103,10 +104,19 @@ const UserPresetCard = ({userPreset}) => {
 
                     <Spacer />
 
-                    {!userPreset.isPublished && (
-                        <Button onClick = {handlePublish}>
+                    {!userPreset.isPublished ? (
+                        <Button bg="white" _hover={{ bg: "gray.300" }} onClick={handlePublish}>
                             Publish
                         </Button>
+                    ) : (
+                        <Button 
+                            bg="transparent"
+                            _hover={{ bg: "transparent" }}
+                            _active={{ bg: "transparent" }}
+                            _focus={{ boxShadow: "none" }}
+                            pointerEvents="none"
+                            cursor="default"
+                        ></Button>
                     )}
                 </HStack>
             </Box>

@@ -21,21 +21,38 @@ const HomePage = () => {
   console.log("presets", presets)
 
   return (
-    <Container>
+    <Container
+      color={"black"}
+    >
       <VStack spacing = {8}>
-        <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
-          Browse Presets
+        <Heading as = {"h1"} size = {"6xl"} fontWeight = "semibold" textAlign = {"center"} mt={16}>
+          Webify
+        </Heading>
+        <Text fontSize="lg" maxW="600px" mt={2}>
+          Discover, explore, and share presets created by the community. 
+        </Text>
+        
+        <Heading
+          as="h2"
+          size="2xl"
+          mt={16}
+          mb={4}
+          textAlign="center"
+        >
+          Featured Themes
         </Heading>
 
         <SimpleGrid
           columns = {{
             base: 1,
+            sm: 2,
             md: 3,
             lg: 4
           }}
-          spacing = {10}
           w = {"full"}
-          mt = {4}
+          bg = "gray.950"
+          borderRadius="xl"
+          shadow={'md'}
         >
           {visiblePresets.map((preset) => (
             <PresetCard key = {preset._id} preset = {preset} />
@@ -47,6 +64,10 @@ const HomePage = () => {
           pageSize={pageSize}
           page={page}
           onPageChange={(e) => setPage(e.page)}
+          bg = "gray.950"
+          borderRadius="xl"
+          mt = {4}
+          shadow={'md'}
         >
           <ButtonGroup variant="ghost" size="sm" justifyContent="center" w="full">
             <Pagination.PrevTrigger asChild>

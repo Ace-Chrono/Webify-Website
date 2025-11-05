@@ -21,7 +21,10 @@ const AccountPage = () => {
   console.log("User Presets", userPresets)
 
   return (
-    <Container py={8}>
+    <Container 
+      py={8}
+      color="black"
+    >
       <VStack spacing={4} align="start">
         <SignedOut>
           <Text fontSize="xl">You are not signed in.</Text>
@@ -34,26 +37,45 @@ const AccountPage = () => {
           {user && (
             <>
               <HStack>
-              <UserButton afterSignOutUrl="/" />
-              <Heading as = {"h1"} size = {"3xl"}>
-                Welcome, {user.firstName}
-              </Heading>
+                <UserButton afterSignOutUrl="/" />
+                <Heading as = {"h1"} size = {"3xl"}>
+                  Welcome, {user.firstName}
+                </Heading>
               </HStack>
               <Box mt={4} textAlign="left">
-                <Text fontSize="lg">Username: {user.username || "Not set"}</Text>
-                <Text fontSize="lg">Email: {user.emailAddresses[0]?.emailAddress}</Text>
-                <Text fontSize="lg">
-                  Date Joined: {new Date(user.createdAt).toLocaleDateString()}
-                </Text>
-                <Text fontSize="lg">User ID: {user.id}</Text>
-                <Button onClick={() => openUserProfile()} mt = {4}>
-                  Edit Account Info
-                </Button>
+                <VStack align="start" spacing={3}>
+                  <Heading as="h2" size="xl">Account Info</Heading>
+                  <HStack>
+                    <Text fontWeight="semibold">Username:</Text>
+                    <Text>{user.username || "Not set"}</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="semibold">Email:</Text>
+                    <Text>{user.emailAddresses[0]?.emailAddress}</Text>
+                  </HStack>
+                  <HStack>
+                    <Text fontWeight="semibold">Date Joined:</Text>
+                    <Text>{new Date(user.createdAt).toLocaleDateString()}</Text>
+                  </HStack>
+
+                  <Button 
+                    onClick={() => openUserProfile()} 
+                    mt = {4}
+                    color={"white"}
+                    bg={"black"}
+                    _hover={{ bg: "gray.600" }}
+                  >
+                    Edit Account Info
+                  </Button>
+                </VStack>
+
+                
+                
               </Box>
               <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mb = {4} mt={4}>
                 Presets
               </Heading>
-              <Box maxH="640px" overflowY="auto" p={2} border="1px solid" borderColor="gray.700" borderRadius="md" mb = {8}>
+              <Box minW="600px" maxH="640px" overflowY="auto" p={2} border="1px solid" bg="gray.900" borderRadius="xl" mb = {8} shadow={"md"}>
                 <SimpleGrid
                   columns = {{
                   base: 1,
@@ -71,15 +93,21 @@ const AccountPage = () => {
                   <Text
                       fontSize = 'xl'
                       textAlign = {"center"}
-                      fontWeight = {"bold"}
-                      color = 'gray.500'
+                      fontWeight = {"semibold"}
+                      color = 'white'
                   >
                     No user presets found
                   </Text>
                 )}
               </Box>
               <SignOutButton redirectUrl="/" >
-                <Button>Sign Out</Button>
+                <Button
+                  color={"white"}
+                  bg={"black"}
+                  _hover={{ bg: "gray.600" }}
+                >
+                  Sign Out
+                </Button>
               </SignOutButton>
             </>
           )}

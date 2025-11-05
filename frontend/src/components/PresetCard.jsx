@@ -56,6 +56,7 @@ const PresetCard = ({preset}) => {
             transition = 'all 0.3s'
             _hover = {{ transform: "translateY(-5px)", shadow: "xl" }}
             m = {4}
+            color={"white"}
         >
             <img
                 src={preset.image}
@@ -70,8 +71,8 @@ const PresetCard = ({preset}) => {
                     <Link to={`/preset/${preset._id}`}>
                         <Text
                             as="span"
-                            color="blue.500"
-                            _hover={{ textDecoration: 'underline' }}
+                            color="blue.400"
+                            _hover={{ color: 'blue.600' }}
                         >
                             View details
                         </Text>
@@ -79,7 +80,7 @@ const PresetCard = ({preset}) => {
 
                     <Spacer />
 
-                    <Button onClick = {handleDownload}>
+                    <Button bg = "white" _hover={{ bg: "gray.300" }} onClick = {handleDownload}>
                         Import
                     </Button>
                 </HStack>

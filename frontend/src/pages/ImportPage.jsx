@@ -3,7 +3,7 @@ import { toaster } from "@/components/ui/toaster";
 import { HiUpload } from "react-icons/hi";
 import { useUserPresetStore } from '@/store/userPreset';
 import { useAuth } from "@clerk/clerk-react";
-import { VStack, Container, Heading, Box, Input, Button, FileUpload, Text } from '@chakra-ui/react';
+import { VStack, HStack, Container, Heading, Box, Input, Button, FileUpload, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const ImportPage = () => {
@@ -37,66 +37,83 @@ const ImportPage = () => {
     };
 
 return (
-    <Container>
+    <Container
+        color="black"
+    >
         <VStack spacing = {8}>
-            <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mt={8}>
+            <Heading as = {"h1"} size = {"5xl"} textAlign = {"center"} mt={16} mb = {4}>
                 Import Preset
             </Heading>
-
-            <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mb = {8} mt={8}>
-                Import Published Presets
-            </Heading>
             <Link to="/">
-                <Button>
+                <Button
+                    bg = "black"
+                    color = "white"
+                    _hover={{ bg: "gray.600" }}
+                >
                     Explore Market Place
                 </Button>
             </Link>
-            <Heading as = {"h1"} size = {"1xl"} textAlign = {"center"} mt={8}>
-                Import Preset Manuallly
+
+            <Heading
+                as="h2"
+                size="2xl"
+                mt={16}
+                mb={4}
+                textAlign="center"
+            >
+                Import manually
             </Heading>
-            <Box minW = "800px" maxW = {"full"} bg = "gray.700" m = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
+            <Box minW = "600px" maxW = {"full"} bg = "gray.900" mb = {8} p = {6} rounded = {"lg"} shadow = {"md"}>
             <VStack spacing = {4}>
                 <Input 
                     placeholder = 'Preset Name' 
+                    color = "white"
                     name = 'name' 
                     value = {newUserPreset.name}
                     onChange = {(e) => setNewUserPreset({ ...newUserPreset, name: e.target.value})}
                 />
-                <FileUpload.Root 
-                    accept={[".json"]}
-                    onFileChange= {(details) => {
-                        const files = details.acceptedFiles;
-                        if (files.length > 0) {
-                            setNewUserPreset({ ...newUserPreset, settings: files[0] });
-                        }
-                    }}
+
+                <HStack
+                    spacing={4}
+                    justify={"center"}
+                    align="stretch" 
+                    w="full"
                 >
-                    <FileUpload.HiddenInput />
+                    <FileUpload.Root 
+                        accept={[".json"]}
+                        onFileChange= {(details) => {
+                            const files = details.acceptedFiles;
+                            if (files.length > 0) {
+                                setNewUserPreset({ ...newUserPreset, settings: files[0] });
+                            }
+                        }}
+                    >
+                        <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
-                            <Button variant="outline" size="sm">
-                                <HiUpload /> Upload JSON Settings
+                            <Button variant="outline" size="sm" w="full">
+                                {newUserPreset.image ? newUserPreset.image.name : "Upload JSON Settings"}
                             </Button>
                         </FileUpload.Trigger>
-                    <FileUpload.List />
-                </FileUpload.Root>
-                <FileUpload.Root 
-                    accept={["image/*"]}
-                    onFileChange= {(details) => {
-                        const files = details.acceptedFiles;
-                        if (files.length > 0) {
-                            setNewUserPreset({ ...newUserPreset, image: files[0] });
-                        }
-                    }}
-                >
-                    <FileUpload.HiddenInput />
+                    </FileUpload.Root>
+                    <FileUpload.Root 
+                        accept={["image/*"]}
+                        onFileChange= {(details) => {
+                            const files = details.acceptedFiles;
+                            if (files.length > 0) {
+                                setNewUserPreset({ ...newUserPreset, image: files[0] });
+                            }
+                        }}
+                    >
+                        <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
-                            <Button variant="outline" size="sm">
-                                <HiUpload /> Upload Image Cover
+                            <Button variant="outline" size="sm" w="full">
+                                {newUserPreset.image ? newUserPreset.image.name : "Upload Image Cover"}
                             </Button>
                         </FileUpload.Trigger>
-                    <FileUpload.List />
-                </FileUpload.Root>
-                <Button bg = "blue.500" onClick = {handleAddUserPreset} w = 'full'>
+                    </FileUpload.Root>
+                </HStack>
+
+                <Button bg = "white" onClick = {handleAddUserPreset} w = 'full' _hover={{ bg: "gray.300" }}>
                     Add Preset
                 </Button>
             </VStack>

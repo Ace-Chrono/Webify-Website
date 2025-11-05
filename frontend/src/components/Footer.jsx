@@ -2,7 +2,7 @@ import { Box, Stack, Text, Link, HStack } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Box as="footer" bg="gray.900" color="white" py={8} px={4}>
+    <Box as="footer" color="white" py={8} px={4} shadow={'md'}>
       <Stack spacing={4} align="center">
         {/*
         <HStack spacing={6}>
