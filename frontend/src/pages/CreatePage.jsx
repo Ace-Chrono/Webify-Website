@@ -59,8 +59,13 @@ const CreatePage = () => {
 
     const {fetchUserPresets, userPresets} = useUserPresetStore();
     useEffect(() =>{
-        fetchUserPresets();
-    }, [fetchUserPresets]);
+        const getUserPresets = async () => {
+            const token = await getToken();
+            console.log("Token:", token);
+            fetchUserPresets(token);
+        }  
+        getUserPresets();
+    }, [fetchUserPresets, getToken]);
     console.log("User Presets", userPresets)
 
     const unpublishedPresets = userPresets.filter(preset => !preset.isPublished);
@@ -84,7 +89,7 @@ const CreatePage = () => {
                     Publish from account
                 </Heading>
 
-                <Box minW="600px" maxH="640px" overflowY="auto" p={2} border="1px solid" bg = "gray.950" borderRadius="xl" shadow={'md'}>
+                <Box minW="400px" minH={'64px'} maxH="640px" alignContent={'center'} overflowY="auto" p={2} border="1px solid" bg = "gray.950" borderRadius="xl" shadow={'md'}>
                     <SimpleGrid
                         columns = {{
                         base: 1,

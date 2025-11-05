@@ -10,14 +10,14 @@ const AccountPage = () => {
   const { openUserProfile } = useClerk();
   const { getToken } = useAuth();
   const {fetchUserPresets, userPresets} = useUserPresetStore();
-    useEffect(() =>{
-      const getUserPresets = async () => {
-        const token = await getToken();
-        console.log("Token:", token);
-        fetchUserPresets(token);
-      }  
-      getUserPresets();
-    }, [fetchUserPresets, getToken]);
+  useEffect(() =>{
+    const getUserPresets = async () => {
+      const token = await getToken();
+      console.log("Token:", token);
+      fetchUserPresets(token);
+    }  
+    getUserPresets();
+  }, [fetchUserPresets, getToken]);
   console.log("User Presets", userPresets)
 
   return (
@@ -75,7 +75,7 @@ const AccountPage = () => {
               <Heading as = {"h1"} size = {"2xl"} textAlign = {"center"} mb = {4} mt={4}>
                 Presets
               </Heading>
-              <Box minW="600px" maxH="640px" overflowY="auto" p={2} border="1px solid" bg="gray.900" borderRadius="xl" mb = {8} shadow={"md"}>
+              <Box minW="400px" minH={'64px'} maxH="640px" alignContent={'center'} overflowY="auto" p={2} border="1px solid" bg="gray.900" borderRadius="xl" mb = {8} shadow={"md"}>
                 <SimpleGrid
                   columns = {{
                   base: 1,

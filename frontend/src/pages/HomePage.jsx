@@ -54,7 +54,7 @@ const HomePage = () => {
             <Text
               fontSize = 'xl'
               textAlign = {"center"}
-              fontWeight = {"bold"}
+              fontWeight = {"semibold"}
               color = 'white'
             >
               No presets found.{" "}
