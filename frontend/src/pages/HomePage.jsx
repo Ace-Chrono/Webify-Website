@@ -102,14 +102,14 @@ const HomePage = () => {
             fontSize = 'xl'
             textAlign = {"center"}
             fontWeight = {"bold"}
-            color = 'gray.500'
+            color = 'black'
           >
             No presets found{" "}
             <Link to = "/create">
               <Text 
                 as = 'span'
-                color = 'white'
-                _hover = {{ textDecoration: "underline" }}
+                color = 'blue.400'
+                _hover = {{ color: 'blue.600' }}
               >
                 Create a preset
               </Text>
