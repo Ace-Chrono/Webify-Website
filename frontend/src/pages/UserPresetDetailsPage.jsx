@@ -78,7 +78,11 @@ const UserPresetDetails = () => {
   }
 
   const { updateUserPreset } = useUserPresetStore();
+  const { updatePreset } = usePresetStore();
   const handleUpdate = async (newName, newSettings, newImage) => {
+    console.log(preset._id);
+    console.log(preset.sourcePresetId);
+
     const token = await getToken();
 
     let name = newName;
@@ -106,19 +110,35 @@ const UserPresetDetails = () => {
       });
     }
 
-    const {success, message} = await updateUserPreset({
+    const {success, message} = await updatePreset({
+      _id: preset.sourcePresetId,
+      name: name,
+      settings: settingsFile,
+      image: imageFile,
+    });
+
+    if (!success) {
+      toaster.create({
+        title: "Error",
+        description: message || "Failed to update preset",
+        type: "error"
+      });
+      return;
+    }
+
+    const {success: userSuccess, message: userMessage} = await updateUserPreset({
       _id: preset._id,
       name: name,
       settings: settingsFile,
       image: imageFile,
       isPublished: true,
-      sourcePresetId: preset._id
+      sourcePresetId: preset.sourcePresetId
     }, token);
 
-    if (!success) {
+    if (!userSuccess) {
       toaster.create({
         title: "Error",
-        description: message || "Failed to update user preset",
+        description: userMessage || "Failed to update user preset",
         type: "error"
       });
       return;

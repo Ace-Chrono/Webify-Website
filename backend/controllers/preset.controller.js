@@ -87,38 +87,39 @@ export const createPreset = async (req, res) => {
 };
 
 export const updatePreset = async (req,res) => {
-    const { id } = req.params;
+  const { id } = req.params;
+  const name = req.body.name;
+  const settingsFile = req.files?.settings?.[0];
+  const imageFile = req.files?.image?.[0];
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({ success: false, message: "Invalid preset Id"});
-    }
+  if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({ success: false, message: "Invalid preset Id"});
+  }
 
-    try {
-        const updateFields = {};
+  if (!name || !settingsFile || !imageFile) {
+      return res.status(400).json({ success: false, message: "Please provide all fields" });
+  }
 
-        if (req.body.name) updateFields.name = req.body.name;
+  const updateFields = {
+      name,
+      settings: {
+          data: settingsFile.buffer,
+          contentType: settingsFile.mimetype,
+          originalName: settingsFile.originalname,
+      },
+      image: {
+          data: imageFile.buffer,
+          contentType: imageFile.mimetype,
+          originalName: imageFile.originalname,
+      },
+  };
 
-        if (req.files?.settings && req.files.settings.length > 0) {
-            updateFields.settings = {
-                data: req.files.settings[0].buffer,
-                contentType: req.files.settings[0].mimetype,
-                originalName: req.files.settings[0].originalname
-            };
-        }
-
-        if (req.files?.image && req.files.image.length > 0) {
-            updateFields.image = {
-                data: req.files.image[0].buffer,
-                contentType: req.files.image[0].mimetype,
-                originalName: req.files.image[0].originalname
-            };
-        }
-
-        const updatedPreset = await Preset.findByIdAndUpdate(id, updateFields, {new:true});
-        res.status(200).json({ success: true, data: updatedPreset });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
+  try {
+      const updatedPreset = await Preset.findByIdAndUpdate(id, updateFields, {new:true});
+      res.status(200).json({ success: true, data: updatedPreset });
+  } catch (error) {
+      res.status(500).json({ success: false, message: "Server Error" });
+  }
 };
 
 export const deletePreset = async (req,res) => {

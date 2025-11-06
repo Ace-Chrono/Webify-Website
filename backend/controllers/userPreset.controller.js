@@ -145,7 +145,8 @@ export const updateUserPreset = async (req,res) => {
       const updatedUserPreset = await userPreset.findByIdAndUpdate(id, updateFields, {new:true});
       res.status(200).json({ success: true, data: updatedUserPreset });
   } catch (error) {
-      res.status(500).json({ success: false, message: "Server Error" });
+      console.error("Update user preset error:", error);
+      res.status(500).json({ success: false, message: error });
   }
 };
 

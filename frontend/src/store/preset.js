@@ -52,6 +52,45 @@ export const usePresetStore = create((set) => ({
         }
         return { success: true, message: data.message, data: data.data };
     },
+    updatePreset: async (newPreset) => {
+        if(!newPreset._id || !newPreset.name || !newPreset.settings || !newPreset.image) {
+            return {success: false, message: "Please fill in all fields."};
+        }
+
+        const formData = new FormData();
+        formData.append("name", newPreset.name);
+        formData.append("settings", newPreset.settings);
+        formData.append("image", newPreset.image);
+
+        for (const [key, value] of formData.entries()) {
+            if (value instanceof File) {
+                console.log(`${key}: File -> name: ${value.name}, type: ${value.type}, size: ${value.size}`);
+            } else {
+                console.log(`${key}: ${value}`);
+            }
+        }
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/presets/${newPreset._id}`, {
+                method: "PUT",
+                body: formData,
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Upload failed");
+
+            set((state) => ({
+                presets: state.presets.map((preset) =>
+                    preset._id === data.data._id ? data.data : preset
+                ),
+            }));
+
+            return { success: true, message: "Preset updated successfully" };
+        } catch (err) {
+            console.error(err);
+            return { success: false, message: err.message };
+        }
+    },
     deletePreset: async (pid) => {
         const res = await fetch(`${API_BASE_URL}/api/presets/${pid}`, {
             method: "DELETE"

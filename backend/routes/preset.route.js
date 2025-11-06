@@ -14,7 +14,14 @@ router.post(
     ]),
     createPreset
 );
-router.put("/:id", updatePreset);
+router.put(
+    "/:id",  
+    upload.fields([
+        { name: 'image', maxCount: 1 },
+        { name: 'settings', maxCount: 1 }
+    ]),
+    updatePreset
+);
 router.delete("/:id", deletePreset);
 
 export default router;

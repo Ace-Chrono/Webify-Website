@@ -95,11 +95,11 @@ export const useUserPresetStore = create((set) => ({
 
         try {
             const res = await fetch(`${API_BASE_URL}/api/userpresets/${newUserPreset._id}`, {
-            method: "PUT",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            body: formData,
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: formData,
             });
 
             const data = await res.json();
@@ -110,7 +110,7 @@ export const useUserPresetStore = create((set) => ({
                     userPreset._id === data.data._id ? data.data : userPreset
                 ),
             }));
-
+            
             return { success: true, message: "User preset updated successfully" };
         } catch (err) {
             console.error(err);
