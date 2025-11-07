@@ -105,7 +105,7 @@ const UserPresetCard = ({userPreset}) => {
                     <Spacer />
 
                     {!userPreset.isPublished ? (
-                        <Button bg="white" _hover={{ bg: "gray.300" }} onClick={handlePublish}>
+                        <Button bg="white" color="black" _hover={{ bg: "gray.300" }} onClick={handlePublish}>
                             Publish
                         </Button>
                     ) : (

@@ -151,7 +151,7 @@ const CreatePage = () => {
                             >
                                 <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
-                                    <Button variant="outline" size="sm" w="full">
+                                    <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
                                         {newPreset.settings ? newPreset.settings.name : "Upload JSON Settings"}
                                     </Button>
                                 </FileUpload.Trigger>
@@ -167,14 +167,14 @@ const CreatePage = () => {
                             >
                                 <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
-                                    <Button variant="outline" size="sm" w="full">
+                                    <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
                                         {newPreset.image ? newPreset.image.name : "Upload Image Cover"}
                                     </Button>
                                 </FileUpload.Trigger>
                             </FileUpload.Root>
                         </HStack>
                         
-                        <Button bg = "white" _hover={{ bg: "gray.300" }} onClick = {handleAddPreset} w = 'full'>
+                        <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} onClick = {handleAddPreset} w = 'full'>
                             Publish Preset
                         </Button>
                     </VStack>

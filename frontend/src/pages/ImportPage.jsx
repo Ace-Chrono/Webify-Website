@@ -90,8 +90,8 @@ return (
                     >
                         <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
-                            <Button variant="outline" size="sm" w="full">
-                                {newUserPreset.image ? newUserPreset.image.name : "Upload JSON Settings"}
+                            <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
+                                {newUserPreset.settings ? newUserPreset.settings.name : "Upload JSON Settings"}
                             </Button>
                         </FileUpload.Trigger>
                     </FileUpload.Root>
@@ -106,14 +106,14 @@ return (
                     >
                         <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
-                            <Button variant="outline" size="sm" w="full">
+                            <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
                                 {newUserPreset.image ? newUserPreset.image.name : "Upload Image Cover"}
                             </Button>
                         </FileUpload.Trigger>
                     </FileUpload.Root>
                 </HStack>
 
-                <Button bg = "white" onClick = {handleAddUserPreset} w = 'full' _hover={{ bg: "gray.300" }}>
+                <Button bg = "white" color = "black" onClick = {handleAddUserPreset} w = 'full' _hover={{ bg: "gray.300" }}>
                     Add Preset
                 </Button>
             </VStack>

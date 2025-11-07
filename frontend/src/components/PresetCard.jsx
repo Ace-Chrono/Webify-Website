@@ -80,7 +80,7 @@ const PresetCard = ({preset}) => {
 
                     <Spacer />
 
-                    <Button bg = "white" _hover={{ bg: "gray.300" }} onClick = {handleDownload}>
+                    <Button bg = "white" color="black" _hover={{ bg: "gray.300" }} onClick = {handleDownload}>
                         Import
                     </Button>
                 </HStack>
