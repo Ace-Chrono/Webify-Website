@@ -37,8 +37,7 @@ const HomePage = () => {
           loop 
           muted 
           playsInline
-          style={{ width: '100%', height: 'auto' }}
-          mt={16}
+          style={{ marginTop: '16px', width: '100%' }}
         >
           <source src="/Webify Demo.mp4" type="video/mp4" />
         </video>
@@ -110,6 +109,7 @@ const HomePage = () => {
           borderRadius="xl"
           mt = {4}
           shadow={'md'}
+          mb={16}
         >
           <ButtonGroup variant="ghost" size="sm" justifyContent="center" w="full">
             <Pagination.PrevTrigger asChild>
