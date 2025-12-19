@@ -3,7 +3,6 @@ import {
   VStack,
   Heading,
   Text,
-  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -25,8 +24,6 @@ const PrivacyPage = () => {
         <Text fontSize="md" textAlign="center" color="gray.600">
           Effective Date: December 19, 2025
         </Text>
-
-        <Divider />
 
         {/* Content Box */}
         <VStack
