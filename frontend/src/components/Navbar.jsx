@@ -47,7 +47,7 @@ const Navbar = () => {
           </Link>
           <Link to="/privacy">
             <Button bg = "gray.200" color="black" _hover={{ bg: "gray.300" }}>
-              privacy
+              Privacy
             </Button>
           </Link>
           <Link to="/account">
