@@ -28,7 +28,7 @@ const HomePage = () => {
         <Heading as = {"h1"} size = {"6xl"} fontWeight = "semibold" textAlign = {"center"} mt={16}>
           Webify
         </Heading>
-        <Text fontSize="lg" maxW="600px" mt={2}>
+        <Text fontSize="lg" maxW="600px" mt={2} mb={16}>
           Discover, explore, and share presets created by the community. 
         </Text>
 
@@ -108,8 +108,8 @@ const HomePage = () => {
           bg = "gray.950"
           borderRadius="xl"
           mt = {4}
-          shadow={'md'}
           mb={16}
+          shadow={'md'}
         >
           <ButtonGroup variant="ghost" size="sm" justifyContent="center" w="full">
             <Pagination.PrevTrigger asChild>
