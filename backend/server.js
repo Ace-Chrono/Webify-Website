@@ -22,6 +22,18 @@ const startServer = async () => {
 
     app.use(express.json());
 
+    app.get("/health", (req, res) => {
+      res.status(200).json({ 
+        status: "ok", 
+        message: "Server is running",
+        timestamp: new Date().toISOString()
+      });
+    });
+
+    app.head("/health", (req, res) => {
+      res.status(200).end();
+    });
+
     app.use("/api/presets", presetRoutes);
     app.use("/api/userpresets", userPresetRoutes);
 
