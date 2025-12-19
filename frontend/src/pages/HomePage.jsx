@@ -31,6 +31,17 @@ const HomePage = () => {
         <Text fontSize="lg" maxW="600px" mt={2}>
           Discover, explore, and share presets created by the community. 
         </Text>
+
+        <video
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          style={{ width: '100%', height: 'auto' }}
+          mt={16}
+        >
+          <source src="/Webify Demo.mp4" type="video/mp4" />
+        </video>
         
         <Heading
           as="h2"
