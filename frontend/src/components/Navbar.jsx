@@ -45,6 +45,11 @@ const Navbar = () => {
               Import
             </Button>
           </Link>
+          <Link to="/privacy">
+            <Button bg = "gray.200" color="black" _hover={{ bg: "gray.300" }}>
+              privacy
+            </Button>
+          </Link>
           <Link to="/account">
             <Button bg = "gray.200" color="black" _hover={{ bg: "gray.300" }}>
               <VscAccount size={24} />

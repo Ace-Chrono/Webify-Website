@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import PresetDetails from './pages/PresetDetailsPage';
 import ImportPage from './pages/ImportPage';
 import UserPresetDetails from './pages/UserPresetDetailsPage';
+import PrivacyPage from './pages/PrivacyPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Box flex = "1">
           <Routes>
             <Route path = "/" element = {<HomePage />} />
+            <Route path = "/privacy" element = {<PrivacyPage />} />
             <Route path = "/create" element = {<CreatePage />} />
             <Route path = "/import" element = {<ImportPage />} />
             <Route path = "/account" element = {<AccountPage />} />
