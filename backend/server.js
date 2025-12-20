@@ -22,16 +22,33 @@ const startServer = async () => {
 
     app.use(express.json());
 
-    app.get("/health", (req, res) => {
-      res.status(200).json({ 
-        status: "ok", 
-        message: "Server is running",
-        timestamp: new Date().toISOString()
-      });
+    app.get("/health", async (req, res) => {
+      try {
+        // Ping MongoDB to keep connection active
+        await mongoose.connection.db.admin().ping();
+        
+        res.status(200).json({ 
+          status: "ok", 
+          message: "Server is running",
+          database: "connected",
+          timestamp: new Date().toISOString()
+        });
+      } catch (error) {
+        res.status(503).json({ 
+          status: "error", 
+          message: "Database connection issue",
+          timestamp: new Date().toISOString()
+        });
+      }
     });
 
-    app.head("/health", (req, res) => {
-      res.status(200).end();
+    app.head("/health", async (req, res) => {
+      try {
+        await mongoose.connection.db.admin().ping();
+        res.status(200).end();
+      } catch (error) {
+        res.status(503).end();
+      }
     });
 
     app.use("/api/presets", presetRoutes);
