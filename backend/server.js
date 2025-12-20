@@ -25,16 +25,27 @@ const startServer = async () => {
 
     app.get("/health", async (req, res) => {
       try {
-        if (mongoose.connection.readyState !== 1) {
+        const { getPresetDB, getUserPresetDB } = await import("./config/db.js");
+        const presetDB = getPresetDB();
+        const userPresetDB = getUserPresetDB();
+        
+        // Check if both databases are connected
+        if (presetDB.readyState !== 1 || userPresetDB.readyState !== 1) {
           throw new Error("Database not connected");
         }
-        // Ping MongoDB to keep connection active
-        await mongoose.connection.db.admin().ping();
+        
+        // Ping both MongoDB connections to keep them active
+        await presetDB.db.admin().ping();
+        await userPresetDB.db.admin().ping();
         
         res.status(200).json({ 
           status: "ok", 
           message: "Server is running",
           database: "connected",
+          databases: {
+            presetDB: "connected",
+            userPresetDB: "connected"
+          },
           timestamp: new Date().toISOString()
         });
       } catch (error) {
@@ -42,6 +53,7 @@ const startServer = async () => {
         res.status(503).json({ 
           status: "error", 
           message: "Database connection issue",
+          error: error.message,
           timestamp: new Date().toISOString()
         });
       }
@@ -49,10 +61,16 @@ const startServer = async () => {
 
     app.head("/health", async (req, res) => {
       try {
-        if (mongoose.connection.readyState !== 1) {
+        const { getPresetDB, getUserPresetDB } = await import("./config/db.js");
+        const presetDB = getPresetDB();
+        const userPresetDB = getUserPresetDB();
+        
+        if (presetDB.readyState !== 1 || userPresetDB.readyState !== 1) {
           throw new Error("Database not connected");
         }
-        await mongoose.connection.db.admin().ping();
+        
+        await presetDB.db.admin().ping();
+        await userPresetDB.db.admin().ping();
         res.status(200).end();
       } catch (error) {
         console.error("Health check error:", error);
