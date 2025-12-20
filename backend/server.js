@@ -25,6 +25,9 @@ const startServer = async () => {
 
     app.get("/health", async (req, res) => {
       try {
+        if (mongoose.connection.readyState !== 1) {
+          throw new Error("Database not connected");
+        }
         // Ping MongoDB to keep connection active
         await mongoose.connection.db.admin().ping();
         
@@ -35,6 +38,7 @@ const startServer = async () => {
           timestamp: new Date().toISOString()
         });
       } catch (error) {
+        console.error("Health check error:", error);
         res.status(503).json({ 
           status: "error", 
           message: "Database connection issue",
@@ -45,9 +49,13 @@ const startServer = async () => {
 
     app.head("/health", async (req, res) => {
       try {
+        if (mongoose.connection.readyState !== 1) {
+          throw new Error("Database not connected");
+        }
         await mongoose.connection.db.admin().ping();
         res.status(200).end();
       } catch (error) {
+        console.error("Health check error:", error);
         res.status(503).end();
       }
     });
