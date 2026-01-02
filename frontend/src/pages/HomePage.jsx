@@ -1,9 +1,10 @@
-import { Container, VStack, Text, SimpleGrid, Heading, ButtonGroup, IconButton, Pagination } from '@chakra-ui/react';
+import { Container, VStack, Text, SimpleGrid, Heading, ButtonGroup, IconButton, Pagination, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { usePresetStore } from '@/store/preset';
 import PresetCard from '@/components/PresetCard';
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { SiGooglechrome } from "react-icons/si";
 import { useState } from 'react';
 
 const HomePage = () => {
@@ -28,9 +29,23 @@ const HomePage = () => {
         <Heading as = {"h1"} size = {"6xl"} fontWeight = "semibold" textAlign = {"center"} mt={16}>
           Webify
         </Heading>
-        <Text fontSize="lg" maxW="600px" mt={2} mb={16}>
+        <Text fontSize="lg" maxW="600px" mt={2} mb={4}>
           Discover, explore, and share presets created by the community. 
         </Text>
+
+        <Button
+          as="a"
+          href="https://chromewebstore.google.com/detail/webify/kknbbnfeogkekngjblbbplkdkoaekcgk?authuser=0&hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          size="lg"
+          px={8}
+          shadow="md"
+          borderRadius="full"
+          mb={16}
+        >
+          <SiGooglechrome /> Add to Chrome — It’s Free
+        </Button>
 
         <video
           autoPlay 
