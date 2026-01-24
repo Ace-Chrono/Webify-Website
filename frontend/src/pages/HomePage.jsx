@@ -43,6 +43,8 @@ const HomePage = () => {
           shadow="md"
           borderRadius="full"
           mb={16}
+          bg="black"
+          color="white"
         >
           <SiGooglechrome /> Add to Chrome — It’s Free
         </Button>
@@ -128,7 +130,7 @@ const HomePage = () => {
         >
           <ButtonGroup variant="ghost" size="sm" justifyContent="center" w="full">
             <Pagination.PrevTrigger asChild>
-              <IconButton aria-label="Previous Page">
+              <IconButton aria-label="Previous Page" color="white">
                 <HiChevronLeft />
               </IconButton>
             </Pagination.PrevTrigger>
@@ -140,6 +142,7 @@ const HomePage = () => {
                   aria-label={`Page ${pageItem.value}`}
                   isActive={pageItem.value === page}
                   onClick={() => setPage(pageItem.value)}
+                  color="white"
                 >
                   {pageItem.value}
                 </IconButton>
@@ -147,7 +150,7 @@ const HomePage = () => {
             />
 
             <Pagination.NextTrigger asChild>
-              <IconButton aria-label="Next Page">
+              <IconButton aria-label="Next Page" color="white">
                 <HiChevronRight />
               </IconButton>
             </Pagination.NextTrigger>

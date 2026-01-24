@@ -29,7 +29,7 @@ const AccountPage = () => {
         <SignedOut>
           <Text fontSize="xl">You are not signed in.</Text>
           <SignInButton mode="modal" mt = {4}>
-            <Button>Sign In</Button>
+            <Button bg={'black'} color={'white'}>Sign In</Button>
           </SignInButton>
         </SignedOut>
 

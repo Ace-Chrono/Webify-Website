@@ -125,7 +125,7 @@ const CreatePage = () => {
                     Publish manually
                 </Heading>
 
-                <Box minW = "600px" maxW = {"full"} bg = "gray.900" mb = {8} p = {6} rounded = {"xl"} shadow = {"md"}>
+                <Box minW = {{ base: "0", md: "600px" }} maxW = {"full"} bg = "gray.900" mb = {8} p = {6} rounded = {"xl"} shadow = {"md"}>
                     <VStack spacing = {4}>
                         <Input 
                             placeholder = 'Preset Name' 

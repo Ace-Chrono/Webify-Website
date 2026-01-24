@@ -10,7 +10,6 @@ const PrivacyPage = () => {
   return (
     <Container color="black">
       <VStack spacing={8} align="stretch">
-        {/* Page Title */}
         <Heading
           as="h1"
           size="5xl"
@@ -24,8 +23,7 @@ const PrivacyPage = () => {
         <Text fontSize="md" textAlign="center" color="gray.600">
           Effective Date: December 19, 2025
         </Text>
-
-        {/* Content Box */}
+        
         <VStack
           spacing={6}
           bg="gray.950"
