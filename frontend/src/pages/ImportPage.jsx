@@ -49,6 +49,7 @@ return (
                     bg = "black"
                     color = "white"
                     _hover={{ bg: "gray.600" }}
+                    mt={8}
                 >
                     Explore Market Place
                 </Button>
@@ -91,7 +92,7 @@ return (
                         <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
                             <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
-                                {newUserPreset.settings ? newUserPreset.settings.name : "Upload JSON Settings"}
+                                {newUserPreset.settings ? newUserPreset.settings.name : "Upload Settings"}
                             </Button>
                         </FileUpload.Trigger>
                     </FileUpload.Root>
@@ -107,7 +108,7 @@ return (
                         <FileUpload.HiddenInput />
                         <FileUpload.Trigger asChild>
                             <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
-                                {newUserPreset.image ? newUserPreset.image.name : "Upload Image Cover"}
+                                {newUserPreset.image ? newUserPreset.image.name : "Upload Image"}
                             </Button>
                         </FileUpload.Trigger>
                     </FileUpload.Root>

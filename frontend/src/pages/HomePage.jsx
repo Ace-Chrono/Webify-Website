@@ -54,7 +54,7 @@ const HomePage = () => {
           loop 
           muted 
           playsInline
-          style={{ marginTop: '16px', width: '100%' }}
+          style={{ marginTop: '16px', width: '100%', borderRadius: '12px' }}
         >
           <source src="/Webify Demo.mp4" type="video/mp4" />
         </video>

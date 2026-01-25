@@ -89,7 +89,7 @@ const CreatePage = () => {
                     Publish from account
                 </Heading>
 
-                <Box minW="400px" minH={'64px'} maxH="640px" alignContent={'center'} overflowY="auto" p={2} border="1px solid" bg = "gray.950" borderRadius="xl" shadow={'md'}>
+                <Box minW={{ base: "0", md: "600px" }} minH={'64px'} maxH="640px" alignContent={'center'} overflowY="auto" p={2} border="1px solid" bg = "gray.950" borderRadius="xl" shadow={'md'}>
                     <SimpleGrid
                         columns = {{
                         base: 1,
@@ -109,6 +109,7 @@ const CreatePage = () => {
                             textAlign = {"center"}
                             fontWeight = {"semibold"}
                             color = "white"
+                            m={2}
                         >
                             No unpublished presets found
                         </Text>
@@ -152,7 +153,7 @@ const CreatePage = () => {
                                 <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
                                     <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
-                                        {newPreset.settings ? newPreset.settings.name : "Upload JSON Settings"}
+                                        {newPreset.settings ? newPreset.settings.name : "Upload Settings"}
                                     </Button>
                                 </FileUpload.Trigger>
                             </FileUpload.Root>
@@ -168,7 +169,7 @@ const CreatePage = () => {
                                 <FileUpload.HiddenInput />
                                 <FileUpload.Trigger asChild>
                                     <Button bg = "white" color = "black" _hover={{ bg: "gray.300" }} w="full">
-                                        {newPreset.image ? newPreset.image.name : "Upload Image Cover"}
+                                        {newPreset.image ? newPreset.image.name : "Upload Image"}
                                     </Button>
                                 </FileUpload.Trigger>
                             </FileUpload.Root>
